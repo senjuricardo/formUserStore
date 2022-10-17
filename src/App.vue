@@ -1,11 +1,22 @@
 <script setup>
-import FormUser from './components/FormUser.vue';
+
+import {RouterView, RouterLink} from 'vue-router'
 
 </script>
 
 <template>
   <h1>VUE FORM </h1>
-    <FormUser></FormUser>
+    <!-- <FormUser></FormUser> -->
+    <button type="button" class="btn btn-primary">  <RouterLink class="text-light text-decoration-none m-2" :to="{name: 'FormUser'}">Manage Users </RouterLink> </button>
+      
+      
+      <button type="button" class="btn btn-primary m-2"> <RouterLink class="text-light text-decoration-none m-2" :to="{name: 'FormList'}">go to Users List  </RouterLink>  </button>
+    
+    <nav>
+    <!-- <RouterLink to="/myself/ricardo/25">go to myself  </RouterLink> -->
+    
+  </nav>
+  <router-view></router-view>
     <footer>Ricardo Sousa T0121085</footer>
 </template>
 

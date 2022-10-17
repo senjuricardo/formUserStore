@@ -42,7 +42,7 @@
             </form>
         </div>
         <div>
-            <ListUser @updateUser="updateUser" :list="getUsers"></ListUser>
+           
         </div>
     </div>
 
@@ -51,7 +51,7 @@
 
 <script>
 import User from '../models/User'
-import ListUser from './ListUser.vue'
+import Users from './Users.vue'
 import isEmptyValue from './../validators/public/isEmptyValue'
 import {userStore} from '../store/userStore'
 import { mapActions } from 'pinia'
@@ -64,10 +64,11 @@ export default {
   },
     data() {
         return {
+            isEmpty: this.userStoreTeste.getUserEdit,
             buttonTile: 'Send',
             editUserID: -1,
             isUpdate: false,
-            createUser: new User(),
+            createUser: this.userStoreTeste.getUserEdit? this.userStoreTeste.getUserEdit : new User(),
             formUser: {
                 firstNameError: false,
                 lastNameError: false,
@@ -122,14 +123,18 @@ export default {
                 
                 if(this.createUser.id){
                 this.userStoreTeste.update(this.createUser)
-                }
-                else
-                this.userStoreTeste.add(this.createUser)
                 this.resertForm()
+                }
+                else{
+                    this.userStoreTeste.add(this.createUser)
+                this.resertForm()
+                }
+                
           
         },
         resertForm() {
             this.createUser = new User();
+            this.userStoreTeste.cleanUserForm()
                 this.formUser.firstNameError= false;
                 this.formUser.lastNameError= false;
                 this.formUser.ageError= false;
@@ -141,7 +146,7 @@ export default {
             this.createUser = item
         }
     },
-    components: { ListUser }
+    
 }
 </script>
 
